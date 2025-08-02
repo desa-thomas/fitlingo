@@ -9,7 +9,6 @@ def create_prompt(data):
         str: A prompt string for the API.
     """
     prompt = f"""Create a {data.get('days', 30)} day workout plan for the following user:
-- Name: {data.get('name', 'N/A')}
 - Age: {data.get('age', 'N/A')}
 - Weight: {data.get('weight', 'N/A')} kg
 - Height: {data.get('height', 'N/A')} cm
@@ -19,18 +18,20 @@ def create_prompt(data):
 - Dumbbells access: {"Yes" if data.get('dumbells-access') else "No"}
 - Frequency: {data.get('frequency', 'N/A')} days per week
 
-Please generate a detailed workout plan in the following format:"""
+Please generate a detailed workout plan effectively helps the user reach their goals
+while taking into consideration their health conditions. Output the plan in the following format:"""
     
-    prompt += ("""{"plan": 
+    prompt += (""" 
     {
         "days": 
         [ 
             {
             "day-name": "push/pull/legs/cardio/rest",
             "day-number": 1,
+            "suggested-calorie-intake": 1500
             "workouts": 
                 [
-                {"name": "dead-lift etc",
+                {"name": "workout name",
                 "sets": 3,
                 "reps": 12,
                 "instructions": "pull weight"}
@@ -38,6 +39,5 @@ Please generate a detailed workout plan in the following format:"""
             }
         ]
     }
-}
 """)
     return prompt
