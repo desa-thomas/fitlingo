@@ -1,12 +1,81 @@
-<!-- Bruh -->
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitlingo</title>
+    <title>Phone App Emulator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
+
+
+
 <body>
-    <div></div>
+    <div class="phone">
+
+        <div class="screen">
+
+            <div class="status-bar">
+                <div class="time">12:00</div>
+                <div class="status-right" style="display: flex; align-items: center;">
+                    <div class="signal">📶</div>
+                    <div class="battery" style="margin-left: 8px;">100%</div>
+                </div>
+            </div>
+
+
+            <!-- Main Menu Page -->
+            <div id="main-menu" class="main-menu-wrapper">
+                <h1 class="menu-title">WELCOME</h1>
+                <h1 class="menu-title">"Name"</h1>
+
+
+                <div class="main-menu-grid">
+                    <div class="menu-square mole-square" style="grid-column: 1 / span 2;">
+                        <div class="mole">Mole</div>
+                    </div>
+                    <div class="menu-square">
+                        <div class="calorie">Calorie</div>
+                    </div>
+                    <div class="menu-square">
+                        <div class="daily-streak">Daily Streak</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Roadmap Page -->
+            <div id="roadmap" class="page" style="display:none;">
+                <h2>Roadmap</h2>
+                <p>Your learning path will appear here.</p>
+            </div>
+
+
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                        <button class="nav-btn active" onclick="showPage('main-menu')">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-label">Main Menu</span>
+                        </button>
+                        <button class="nav-btn" onclick="showPage('roadmap')">
+                            <span class="nav-icon">🏋️‍♂️</span>
+                            <span class="nav-label">Roadmap</span>
+                        </button>
+                        <button class="nav-btn" onclick="showPage('socials')">
+                            <span class="nav-icon">🌐</span>
+                            <span class="nav-label">Socials</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<script src="main.js"></script>
 </body>
 </html>
