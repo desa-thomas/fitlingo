@@ -10,6 +10,4 @@ INPUT:
     "machine-access": true,
     "dumbells-access": true,
     "frequency": 5, //in days
-
-
 }
