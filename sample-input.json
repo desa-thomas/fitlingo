@@ -1,0 +1,11 @@
+{
+    "name": "jane", 
+    "age": 20,
+    "weight": 50,
+    "height": 160,
+    "weight-goal": ["lose", 3],
+    "health-conditions": ["athritis"],
+    "machine-access": true,
+    "dumbells-access": true,
+    "frequency": 3
+}
