@@ -2,11 +2,13 @@
     "name": "john", 
     "age": 20,
     "weight": 50,
+    "sex": "m",
     "height": 130,
     "weight-goal": ["lose", 2],
     "health-conditions": ["na"],
     "machine-access": true,
     "dumbells-access": true,
-    "frequency": 5
+    "frequency": 5,
+    "days": 30
 
 }
