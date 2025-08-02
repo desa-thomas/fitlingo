@@ -1,5 +1,5 @@
 import json
-from create_prompt import create_prompt
+from gemini import create_prompt
 from gemini import create_workout_plan
 
 data = json.loads("""{
