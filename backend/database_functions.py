@@ -121,22 +121,3 @@ def add_user(data: dict):
 
     print(err[1])
     return err
-
-data = json.loads("""
-{
-    "username": "anothaone-again", 
-    "first-name": "tom", 
-    "last-name": "bruh", 
-    "age": 20,
-    "weight": 50,
-    "sex": "m",
-    "height": 140,
-    "weight-goal": ["lose", 2],
-    "health-conditions": ["na"],
-    "machine-access": true,
-    "dumbells-access": true,
-    "frequency": 5,
-    "days": 5
-}
-    """)
-add_user(data)
