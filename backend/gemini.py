@@ -24,25 +24,27 @@ def create_prompt(data):
 - Dumbbells access: {"Yes" if data.get('dumbells-access') else "No"}
 - Frequency: {data.get('frequency', 'N/A')} days per week
 
-Please generate a detailed workout plan in the following format:"""
+Please generate a detailed workout plan taking into consideration the users health conditions
+and goals in the following format:"""
     
     prompt += ("""
-        "plan": {
-            "days": [
-                {
-                    "day-name": "push/pull/legs/cardio/rest",
-                    "day-number": 1,
-                    "workouts": [
-                        {
-                            "name": "dead-lift etc",
-                            "sets": 3,
-                            "reps": 12,
-                            "instructions": "pull weight"
-                        }
-                    ]
-                }
-            ]
-        }
+    {
+        "days": [
+            {
+                "day-name": "push/pull/legs/cardio/rest",
+                "day-number": 1,
+                "estimated-workout-time"
+                "workouts": [
+                    {
+                        "name": "dead-lift etc",
+                        "sets": 3,
+                        "reps": 12,
+                        "instructions": "pull weight"
+                    }
+                ]
+            }
+        ]
+    }
     """)
     return prompt
 
@@ -96,4 +98,4 @@ def create_workout_plan(data):
         # If parsing fails, return a detailed error message with the raw data.
         plan = {"error": f"Could not parse response. Exception: {e}", "raw": stripped_response}
 
-    return json.dumps(plan, indent=2)
+    return plan
