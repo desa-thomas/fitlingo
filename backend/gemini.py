@@ -1,5 +1,6 @@
 from google import genai
 from config import API_KEY
+from functions import create_prompt
 import json
 
 client = genai.Client(api_key=API_KEY)
@@ -23,7 +24,7 @@ def create_workout_plan(data):
         plan (dict) - json formatted plan, refer to sample-output.json
     """
 
-    #prompt = create_prompt(data)
+    prompt = create_prompt(data)
     response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
     plan = json.loads(response)
 
