@@ -10,6 +10,10 @@ client = MongoClient(url)
 db = client["fitlingo"]
 user_collection = db["users"]
 
+def serialize_doc(doc):
+    doc["_id"] = str(doc["_id"])
+    return doc
+
 def get_user_data(username:str):
     """
     Get user plan data from database using username
@@ -20,6 +24,9 @@ def get_user_data(username:str):
     if user == None:
         print(f"user: {username} does not exist")
     
+    else:
+        user = serialize_doc(user)
+
     return user
 
 def update_user_plan(username:str, plan:int):
@@ -121,3 +128,15 @@ def add_user(data: dict):
 
     print(err[1])
     return err
+
+def search_user(query_string: str):
+    """
+    search for users based on query
+    """
+
+    query = {"username": {"$regex": query_string, "$options": "i"}}
+    results = user_collection.find(query)
+
+    serialized = [serialize_doc(doc) for doc in results]
+
+    return serialized

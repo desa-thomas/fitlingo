@@ -20,23 +20,23 @@ def register():
     if not data:
         return jsonify({'error': 'No JSON data received'}), 400
 
+    username = data.get("username", None)
+    if username is None:
+        return jsonify ({"error": "Missing username"}), 400
+
     #add user to database
-    err = add_user(data)
+    err = db.add_user(data)
     if err[0]:
-        return jsonify({"error": err[1]})
+        return jsonify({"error": err[1]}), 400
     
     #create a workout plan
     plan = create_workout_plan(data)
 
-    username = data.get("username", None)
-    if username is None:
-        return jsonify ({"error": "Missing username"})
-
     #add generated workout plan to database
-    err = update_user_plan(username, plan)
+    err = db.update_user_plan(username, plan)
 
     if err[0]:
-        return jsonify({"error": err[1]})
+        return jsonify({"error": err[1]}), 400
 
     return jsonify({"msg": "user successfully created"}), 200
 
@@ -45,12 +45,42 @@ def search_user():
     return
 
 @app.route('/getuser', methods=['GET'])
-def serve_user_data(username):
+def serve_user_data():
     """
     Serve user data based on user name
     """
+    username = request.args.get("username")
+    
+    if not username:
+        data = jsonify({"err": "missing required parameter 'username'"})
+        code = 400
+    
+    #username is provided 
+    else:
+        data = db.get_user_data(username)
+        if not data:
+            data = jsonify({"err": f"user: {username} does not exist"})
+            code = 400
+        else:
+            print(data)
+            code = 200
+    
 
-    return
+    return data, code
+
+@app.route('/search', methods=['GET'])
+def search_user():
+    query = request.args.get("query")
+
+    if not query:
+        results = jsonify({"err": "Missing required parameter: 'query'"})
+        code = 400
+    
+    else:
+        results = db.search_user(query)
+        code = 200
+
+    return results, code
 
 @app.route('/complete-day', methods=['POST'])
 def complete_day():
