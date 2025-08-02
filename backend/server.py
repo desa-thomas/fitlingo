@@ -30,7 +30,9 @@ def register():
         return jsonify({"error": err[1]}), 400
     
     #create a workout plan
-    plan = create_workout_plan(data)
+    err, plan = create_workout_plan(data)
+    if err: 
+        return jsonify(plan), 400
 
     #add generated workout plan to database
     err = db.update_user_plan(username, plan)
