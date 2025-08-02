@@ -1,0 +1,15 @@
+INPUT:
+
+{
+    "name": "name", 
+    "age": 20,
+    "weight": 50, //kgs
+    "height": 130, //m
+    "weight-goal": ["lose or gain", amount],
+    "health-conditions": ["na"], //list of health conditions
+    "machine-access": true,
+    "dumbells-access": true,
+    "frequency": 5, //in days
+
+
+}

@@ -1,0 +1,9 @@
+{"plan": {
+    "length": 1,
+    "days": [
+        {"day-name": "push",
+        "workouts": [
+            {"name": "dead-lift",}
+        ]}
+    ]
+}}
