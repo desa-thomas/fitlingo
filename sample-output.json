@@ -1,9 +1,17 @@
-{"plan": {
-    "length": 1,
-    "days": [
-        {"day-name": "push",
-        "workouts": [
-            {"name": "dead-lift",}
-        ]}
+{"plan": 
+{
+    "days": 
+    [
+        {
+        "day-name": "push",
+        "workouts": 
+            [
+            {"name": "dead-lift",
+            "sets": 3,
+            "reps": 12,
+            "instructions": "pull weight"}
+            ]
+        }
     ]
-}}
+}
+}
