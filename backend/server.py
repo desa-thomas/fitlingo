@@ -40,20 +40,24 @@ def register():
 
     return jsonify({"msg": "user successfully created"}), 200
 
+@app.route('/search', methods=['GET'])
+def search_user():
+    return
+
 @app.route('/getuser', methods=['GET'])
 def serve_user_data(username):
     """
     Serve user data based on user name
     """
+
     return
-
-@app.route('/search', methods=['GET'])
-def search_user():
-
-    return "Hello alice"
 
 @app.route('/complete-day', methods=['POST'])
 def complete_day():
+    username = request.args.get("username")
+    day_no = request.args.get("day_no", type=int)
+
+    db.complete_day(username, day_no)
     return
 
 @app.route('/complete-exercise', methods=['POST'])
@@ -61,7 +65,7 @@ def complete_exercise():
 
     username = request.args.get("username")
     workout_no = request.args.get("workout_no")
-    day_no = request.args.get("day_no")
+    day_no = request.args.get("day_no") 
 
     db.complete_workout(username, workout_no, day_no)
     return
