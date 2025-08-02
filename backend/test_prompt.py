@@ -1,16 +1,18 @@
 import json
-from functions import create_prompt
+from create_prompt import create_prompt
+from gemini import create_workout_plan
 
-# Load sample input JSON
-with open('../sample-input.json', 'r') as f:
-    user_data = json.load(f)
-
-# Generate prompt
-prompt = create_prompt(user_data)
-
-# # Print or send to Gemini API
-print(prompt)
-# Call Gemini API function:
-# response = gemini_api(prompt)  # This should return a JSON string
-# response_dict = json.loads(response)  # Convert JSON string to Python dict
-# print(response_dict)
+data = json.loads("""{
+    "name": "john", 
+    "age": 20,
+    "weight": 50,
+    "sex": "m",
+    "height": 130,
+    "weight-goal": ["lose", 2],
+    "health-conditions": ["na"],
+    "machine-access": true,
+    "dumbells-access": true,
+    "frequency": 1,
+    "days": 1
+}""")
+print(create_workout_plan(data))
