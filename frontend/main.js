@@ -51,19 +51,11 @@ function populateMainMenu(user) {
   const shortIntake = fullIntake.slice(0, 14);
   document.querySelector('.calorie').textContent = shortIntake;
 
-  // Show first workout name and sets in daily streak square for demo
-  const workoutDay = user.plan.days[0];
-  if (workoutDay && workoutDay.workouts && workoutDay.workouts.length > 0) {
-    const workout = workoutDay.workouts[0];
-    document.querySelector('.daily-streak').textContent =
-      `${workout.name} - ${workout.sets} sets of ${workout.reps} reps`;
-  } else {
-    document.querySelector('.daily-streak').textContent = 'No workouts scheduled';
-  }
-}
+
 
 // On page load, call the fetch with username
 document.addEventListener('DOMContentLoaded', () => {
   const username = 'test_user'; // Replace dynamically as needed
   loadUserData(username);
 });
+}
