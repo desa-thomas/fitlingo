@@ -44,10 +44,12 @@ async function loadUserData(username) {
 
 function populateMainMenu(user) {
   // Example: show first name in mole square
-  document.querySelector('.mole').textContent = `Welcome, ${user["first-name"]}!`;
+  document.querySelector('.username').textContent = `${user["first-name"]}!`;
 
   // Show age in calorie square for demo
-  document.querySelector('.calorie').textContent = `Age: ${user.age}`;
+  const fullIntake = user.plan.days[0]["suggested-calorie-intake"];
+  const shortIntake = fullIntake.slice(0, 14);
+  document.querySelector('.calorie').textContent = shortIntake;
 
   // Show first workout name and sets in daily streak square for demo
   const workoutDay = user.plan.days[0];
