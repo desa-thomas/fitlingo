@@ -30,11 +30,11 @@ def update_user_plan(username:str, plan:int):
     res = user_collection.update_one({"username": username}, {"$set": {"plan": plan}})
 
     if res.matched_count == 0:
-        err = f"err: no user by name {username}."
+        err = (1, f"err: no user by name {username}.")
     elif res.modified_count == 0:
-        err = f"err: user: {username} exists, but no change was made to plan"
+        err = (0, f"user: {username} exists, but no change was made to plan")
     else:
-        err = "Plan successfully added"
+        err = (0, "Plan successfully added")
 
     print (err)
     return err
@@ -87,10 +87,15 @@ def complete_workout(username:str, day_no: int, workout_no: int):
     return err
 
 def add_user(data: dict):
+    """
+    add user to database
+    return 
+        (errcode, msg) - 1 if there is err, 0 if successful
+    """
     username = data.get("username", None)
 
     if username is None:
-        err = "Missing username"
+        err = (1, "Missing username")
         
     elif not user_collection.find_one({"username": username}):
     
@@ -102,19 +107,19 @@ def add_user(data: dict):
         if missing_keys:
             err = f"Missing the following data for user: {missing_keys}"
             print(err)
-            return err
+            return (1, err)
 
         result = user_collection.insert_one(data)
 
         if result.inserted_id:
-            err = "insert successful"
+            err =(0, "insert successful")
         else:
-            err = "insert failed"
+            err = (1, "insert failed")
 
     else: 
-        err = f"user '{username}' already exists"
+        err = (1, f"user '{username}' already exists")
 
-    print(err)
+    print(err[1])
     return err
 
 data = json.loads("""
