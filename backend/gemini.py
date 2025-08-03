@@ -27,7 +27,8 @@ def create_prompt(data):
 - Skill level: {data.get('skill', 'beginner')}
 
 Please generate a detailed workout plan taking into consideration the users health conditions,
-goals, skill level and desired intensity. Also include rest days. Output the plan ONLY in the following json format:"""
+goals, skill level and desired intensity. Also include rest days. 
+Output the plan ONLY in the following json format:"""
     
     prompt += ("""
     {
@@ -43,11 +44,12 @@ goals, skill level and desired intensity. Also include rest days. Output the pla
                         "sets": 3,
                         "reps": 12,
                         "instructions": "pull weight"
-                    }
+                    },
                 ]
             }
         ]
     }
+    If the day is a rest day, include 1 workout like so {"name": "rest", "sets": 1, "reps": 1, "instructions": "rest today"}
     """)
     return prompt
 

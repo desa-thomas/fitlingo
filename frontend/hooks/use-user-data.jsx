@@ -1,5 +1,6 @@
 "use client"
 const url = "http://fitlingo.duckdns.org:5000"
+let user = "tomcat"
 
 import { useState, useEffect } from "react"
 
@@ -10,7 +11,8 @@ let user_data = null
  * Custom hook to fetch and manage user data from the API
  * Fetches data from http://fitlingo.duckdns.org:5000/getuser?username=username
  */
-export function useUserData(username = "test_user") {
+export function useUserData(username) {
+  console.log("userUserData")
   const [userData, setUserData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -23,8 +25,9 @@ export function useUserData(username = "test_user") {
         setError(null)
 
         // Fetch user data from API'
-        console.log(`${url}/getuser?username=${username}`)
-        const response = await fetch(`${url}/getuser?username=${username}`)
+        console.log(user)
+        console.log(`${url}/getuser?username=${user}`)
+        const response = await fetch(`${url}/getuser?username=${user}`)
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
