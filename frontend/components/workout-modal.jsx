@@ -74,7 +74,7 @@ export function WorkoutModal({ dayData, isOpen, onClose, onWorkoutUpdate }) {
         </div>
 
         {/* Modal body */}
-        <div className="p-4 overflow-y-auto max-h-96" style={{"padding-top": "0px"}}>
+        <div className="p-4 overflow-y-auto max-h-96" style={{"paddingTop": "0px"}}>
           {/* Day info */}
           <div className="mb-4 ">
             {/* <div className="flex items-center text-sm text-amber-800">
