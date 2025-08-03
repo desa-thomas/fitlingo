@@ -8,6 +8,7 @@ window.onload = function() {
     loadUserData(username);
 }
 
+
 function showPage(pageId) {
     const pages = ['main-menu', 'roadmap', 'settings'];
     pages.forEach(id => {
@@ -34,7 +35,6 @@ function showPage(pageId) {
 }
 
 
-
 async function loadUserData(username) {
   try {
     console.log("waiting..."); 
@@ -53,12 +53,16 @@ async function loadUserData(username) {
 }
 
 function populateMainMenu(user) {
-  // Example: show first name in mole square
-  document.querySelector('.username').textContent = `${user["first-name"]}!`;
+  const greeting = getTimeGreeting();
+  const firstName = capitalizeFirstLetter(user["first-name"] || "User");
 
-  // Show age in calorie square for demo
+  document.querySelector('.greeting').textContent = `${greeting}, ${firstName}!`; //set gretting message
+
+  // You can still show the name elsewhere if needed
+  document.querySelector('.username').textContent = `${firstName}!`;
+
+  // Show calorie intake
   const fullIntake = user.plan.days[0]["suggested-calorie-intake"];
   const shortIntake = fullIntake.slice(0, 14);
   document.querySelector('.calorie').textContent = shortIntake;
-
 }

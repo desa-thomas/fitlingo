@@ -1,0 +1,20 @@
+{"plan": 
+{
+    "days": 
+    [
+        {
+        "day-name": "push",
+        "day-number": 1,
+        "date-completed": "none", 
+        "workouts": 
+            [
+            {"name": "dead-lift",
+            "sets": 3,
+            "reps": 12,
+            "instructions": "pull weight",
+            "completed": false}
+            ]
+        }
+    ]
+}
+}

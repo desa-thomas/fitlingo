@@ -1,0 +1,17 @@
+{
+    "username": "user1", 
+    "first-name": "john", 
+    "last-name": "smith", 
+    "age": 20,
+    "weight": 50,
+    "sex": "m",
+    "height": 130,
+    "weight-goal": ["lose", 2],
+    "health-conditions": ["na"],
+    "machine-access": true,
+    "dumbells-access": true,
+    "frequency": 5,
+    "days": 30,
+    "intensity": "light",
+    "skill": "beginner"
+}

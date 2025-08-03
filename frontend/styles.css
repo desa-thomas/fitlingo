@@ -3,8 +3,7 @@ body, html {
     margin: 0;
     padding: 0;
     background: #51a8ff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-}
+    font-family: 'Montserrat', 'Poppins', 'Roboto', sans-serif;}
 
 .menu-title {
     grid-column: 1 / -1; /* Span across all grid columns */
@@ -15,10 +14,20 @@ body, html {
     margin-bottom: 10px; /* Optional: tighten spacing */
 }
 
+.greeting {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  margin-top: 10vh;
+  text-align: center;
+  margin-bottom: 10px;
+}
 
 .phone {
-    width: 375px;
-    height: 760px;
+    width: 100vw;
+    height: 100vh;
+    max-width: 500px;  /* Optional: limits max width on tablets */
+    max-height: 1000px; /* Optional: limits on large screens */
     border-radius: 36px;
     background: rgb(37, 37, 37); /* Match border color */
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
@@ -121,7 +130,7 @@ body, html {
 .main-menu-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 140px;
+    grid-auto-rows: minmax(100px, 18vh);
     gap: 24px;
     padding-bottom: 40px;
     box-sizing: border-box;
@@ -138,8 +147,9 @@ body, html {
     font-size: 1.2rem;
     font-weight: 600;
     color: #222;
-    height: 140px;   /* Fixed square size */
-    
+    height: 13vh;   /* Fixed square size */
+    min-height: 120px;
+    max-height: 200px;
 }
 
 .username {
