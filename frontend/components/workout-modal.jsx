@@ -34,7 +34,7 @@ export function WorkoutModal({ dayData, isOpen, onClose, onWorkoutUpdate }) {
     const allCompleted = updatedDayData.workouts.every((workout) => workout.completed === true)
 
     // If all exercises are completed, mark the day as completed
-    if (allCompleted && !updatedDayData["date-completed"]) {
+    if (allCompleted && !updatedDayData["date-completed"] || dayData["day-name"] == "Rest") {
       updatedDayData["date-completed"] = new Date().toISOString()
     }
     // If not all exercises are completed, remove day completion
@@ -61,40 +61,38 @@ export function WorkoutModal({ dayData, isOpen, onClose, onWorkoutUpdate }) {
           <div className="absolute inset-0 opacity-20 bg-gradient-to-br from-amber-900 to-amber-800"></div>
 
           <div className="relative z-10 flex justify-between items-start">
-            <div>
+            <div style={{"width": "100%"}}>
               <h2 className="text-xl font-bold mb-1">{localDayData["day-name"]}</h2>
-              <div className="text-amber-200 text-sm">Day {localDayData["day-number"]}</div>
+              <div className="text-amber-200 text-sm" style={{"display": "flex", "justifyContent": "space-between", "width": "100%"}}>
+                Day {localDayData["day-number"]} <span>⏱️ {localDayData["estimated-workout-time"]}</span></div>
+              
             </div>
-            <button onClick={onClose} className="text-amber-200 hover:text-white text-2xl font-bold leading-none">
+            {/* <button onClick={onClose} className="text-amber-200 hover:text-white text-2xl font-bold leading-none">
               ×
-            </button>
+            </button> */}
           </div>
         </div>
 
         {/* Modal body */}
-        <div className="p-4 overflow-y-auto max-h-96">
+        <div className="p-4 overflow-y-auto max-h-96" style={{"padding-top": "0px"}}>
           {/* Day info */}
-          <div className="mb-4 space-y-2">
-            <div className="flex items-center text-sm text-amber-800">
+          <div className="mb-4 ">
+            {/* <div className="flex items-center text-sm text-amber-800">
               <span className="mr-2">⏱️</span>
               <span>{localDayData["estimated-workout-time"]}</span>
-            </div>
-            <div className="flex items-center text-sm text-amber-800">
+            </div> */}
+            {/* <div className="flex items-center text-sm text-amber-800">
               <span className="mr-2">🍽️</span>
               <span>{localDayData["suggested-calorie-intake"]}</span>
-            </div>
-            <div className="flex items-center text-sm text-amber-800">
+            </div> */}
+            {/* <div className="flex items-center text-sm text-amber-800">
+              
               <span className="mr-2">💪</span>
               <span>
                 {completedWorkouts}/{totalWorkouts} exercises completed
               </span>
-            </div>
-            {localDayData["date-completed"] && (
-              <div className="flex items-center text-sm text-green-700">
-                <span className="mr-2">✅</span>
-                <span>Completed on {new Date(localDayData["date-completed"]).toLocaleDateString()}</span>
-              </div>
-            )}
+            </div> */}
+            
           </div>
 
           {/* Progress bar */}
@@ -159,9 +157,9 @@ export function WorkoutModal({ dayData, isOpen, onClose, onWorkoutUpdate }) {
                   </div>
 
                   {/* Status indicator */}
-                  <div className={`text-xl ${workout.completed ? "text-green-600" : "text-amber-600"}`}>
+                  {/* <div className={`text-xl ${workout.completed ? "text-green-600" : "text-amber-600"}`}>
                     {workout.completed ? "✅" : "⏳"}
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Exercise details */}
@@ -200,7 +198,7 @@ export function WorkoutModal({ dayData, isOpen, onClose, onWorkoutUpdate }) {
           {localDayData["date-completed"] && (
             <div className="mt-4 p-3 bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-300 rounded-lg text-center">
               <div className="text-2xl mb-1">🎉</div>
-              <div className="text-green-800 font-semibold">Excavation Complete!</div>
+              <div className="text-green-800 font-semibold">Day Complete!</div>
               <div className="text-green-700 text-sm">All exercises finished - great work!</div>
             </div>
           )}

@@ -91,7 +91,7 @@ export function DynamicRoadmap({ userData, onUserDataUpdate }) {
 
   return (
     <>
-      <div className="relative px-5 h-[500px] overflow-y-auto">
+      <div className="relative px-5 h-[600px] overflow-y-auto">
         {/* Cave/tunnel walls using SVG */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 300 600" style={{ zIndex: 1 }}>
           <defs>
