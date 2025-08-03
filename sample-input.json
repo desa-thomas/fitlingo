@@ -1,5 +1,7 @@
 {
-    "name": "john", 
+    "username": "user1", 
+    "first-name": "john", 
+    "last-name": "smith", 
     "age": 20,
     "weight": 50,
     "sex": "m",
@@ -9,6 +11,7 @@
     "machine-access": true,
     "dumbells-access": true,
     "frequency": 5,
-    "days": 30
-
+    "days": 30,
+    "intensity": "light",
+    "skill": "beginner"
 }

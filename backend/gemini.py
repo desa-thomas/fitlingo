@@ -23,9 +23,11 @@ def create_prompt(data):
 - Machine access: {"Yes" if data.get('machine-access') else "No"}
 - Dumbbells access: {"Yes" if data.get('dumbells-access') else "No"}
 - Frequency: {data.get('frequency', 'N/A')} days per week
+- Intensity: {data.get('intensity', 'average')}
+- Skill level: {data.get('skill', 'beginner')}
 
-Please generate a detailed workout plan taking into consideration the users health conditions
-and goals in the following format:"""
+Please generate a detailed workout plan taking into consideration the users health conditions,
+goals, skill level and desired intensity. Also include rest days. Output the plan ONLY in the following json format:"""
     
     prompt += ("""
     {
@@ -33,7 +35,8 @@ and goals in the following format:"""
             {
                 "day-name": "push/pull/legs/cardio/rest",
                 "day-number": 1,
-                "estimated-workout-time"
+                "estimated-workout-time": x-y minutes
+                "suggested-calorie-intake": x-y cals,
                 "workouts": [
                     {
                         "name": "dead-lift etc",
@@ -60,6 +63,7 @@ def create_workout_plan(data):
     Returns:
         dict: A json formatted plan, refer to sample-output.json, or an error dictionary.
     """
+    err = 0
     prompt = create_prompt(data)
     response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
 
@@ -71,7 +75,8 @@ def create_workout_plan(data):
         # If the response structure is unexpected, fall back to a raw string
         # representation for debugging.
         plan = {"error": "Could not find text in response object", "raw": str(response)}
-        return plan
+        err = 1
+        return err, plan
 
     # Split the text into lines for cleaning.
     lines = response_text.splitlines()
@@ -97,5 +102,6 @@ def create_workout_plan(data):
     except Exception as e:
         # If parsing fails, return a detailed error message with the raw data.
         plan = {"error": f"Could not parse response. Exception: {e}", "raw": stripped_response}
+        err = 1
 
-    return plan
+    return err, plan

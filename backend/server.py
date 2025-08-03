@@ -42,10 +42,6 @@ def register():
 
     return jsonify({"msg": "user successfully created"}), 200
 
-@app.route('/search', methods=['GET'])
-def search_user():
-    return
-
 @app.route('/getuser', methods=['GET'])
 def serve_user_data():
     """
@@ -64,7 +60,7 @@ def serve_user_data():
             data = jsonify({"err": f"user: {username} does not exist"})
             code = 400
         else:
-            print(data)
+            
             code = 200
     
 
@@ -86,21 +82,52 @@ def search_user():
 
 @app.route('/complete-day', methods=['POST'])
 def complete_day():
-    username = request.args.get("username")
-    day_no = request.args.get("day_no", type=int)
+    data = request.get_json()
+    if not data:
+        return jsonify({"err": "missing body parameters"}), 400
 
-    db.complete_day(username, day_no)
-    return
+    username = data.get("username", None)
+    day_no = data.get("day_no", None)
+
+    if not username:
+        res = jsonify({"err": "Missing requried parameter username"})
+        code = 400
+    elif not day_no:
+        res = jsonify({"err": "Missing required parameter day_no"})
+        code = 400
+    else:
+        err, msg = db.complete_day(username, day_no)
+        if err:
+            res = jsonify({"err": msg})
+            code = 400
+        else: 
+            res = jsonify({"msg": msg})
+            code = 200
+
+    print(res, code)
+    return res, code
 
 @app.route('/complete-exercise', methods=['POST'])
 def complete_exercise():
 
-    username = request.args.get("username")
-    workout_no = request.args.get("workout_no")
-    day_no = request.args.get("day_no") 
+    data = request.get_json() 
+    if not data: 
+        return jsonify({"err": "Missing parameter body"}), 400
+    
+    username = data.get("username", None)
+    day_no = data.get("day_no", None)
+    workout_no = data.get("workout_no", None)
 
-    db.complete_workout(username, workout_no, day_no)
-    return
+    if username == None or day_no == None or workout_no == None:
+        return jsonify({"err": f"Missing one or more required parameters: 'username', 'day_no', 'exercise_no']"}), 400
+
+    msg, err = db.complete_workout(username, day_no, workout_no)
+    if err:
+        code = 400
+    else: 
+        code = 200
+    
+    return jsonify(msg), code
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",debug=True)

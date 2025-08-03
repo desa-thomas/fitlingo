@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import json
 from datetime import datetime
 
-allowed_user_keys = {"username", "age", "weight", "sex", "height", "weight-goal", "health-conditions", "machine-access", "frequency", "days"}
+allowed_user_keys = {"username", "age", "weight", "sex", "height", "weight-goal", "health-conditions", "machine-access", "frequency", "days", "intensity"}
 
 url = f"mongodb+srv://{db_user}:{db_pass}@td-cluster.3rurkdz.mongodb.net/{db_name}?retryWrites=true&w=majority&appName=TD-Cluster"
 client = MongoClient(url)
@@ -56,15 +56,19 @@ def complete_day(username:str, day_no: int):
     {"$set": {f"plan.days.{day_no-1}.date-completed": datetime.now()} } )
 
     if res.matched_count == 0:
-        err = f"err: no user found with the following attributes:\n{query}"   
+        msg = f"err: no user found with the following attributes:\n{query}"
+        err = 1
     
     elif res.modified_count == 0:
-        err = f"err: user: {username} exists, but no change was made to `date-completed`"
+        msg = f"err: user: {username} exists, but no change was made to `date-completed`"
+        err = 0
+
     else:
-        err = f"day {day_no} marked as completed"
+        msg = f"day {day_no} marked as completed"
+        err = 0
 
     print(err)
-    return err
+    return err, msg 
 
 def complete_workout(username:str, day_no: int, workout_no: int):
     """
@@ -75,23 +79,27 @@ def complete_workout(username:str, day_no: int, workout_no: int):
     query = {"username": username, 
     f"plan.days.{day_index}": {"$exists": True}, #make sure day and workout exist
     f"plan.days.{day_index}.workouts.{day_index}": {"$exists": True}}
-    print(query)
+    
     res = user_collection.update_one(
         query,
         {"$set": {f"plan.days.{day_index}.workouts.{workout_index}.completed": True}}
     )
     
     if res.matched_count == 0:
-        err = f"err: no document found with following attributes:\n{query}"   
+        msg = f"err: no document found with following attributes:\n{query}"   
+        err = 1
     
     elif res.modified_count == 0:
-        err = f"err: user: {username} exists, but no change was made to `plan.days.{day_no-1}.workouts.{workout_no}-1.completed`"
+        msg = f"err: user: {username} exists, but no change was made to `plan.days.{day_no-1}.workouts.{workout_no}-1.completed`"
+        err = 0
+
     else:
-        err = f"day {day_no} workout {workout_no} marked as completed"
+        msg = f"day {day_no} workout {workout_no} marked as completed"
+        err = 0
 
     print(err)
     
-    return err
+    return msg, err
 
 def add_user(data: dict):
     """
