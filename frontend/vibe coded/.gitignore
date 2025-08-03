@@ -1,9 +1,4 @@
-.idea
-.venv
-config.py
-__pycache__
-test_prompt.py
-projects/ 
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
