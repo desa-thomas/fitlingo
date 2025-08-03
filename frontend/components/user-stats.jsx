@@ -22,7 +22,7 @@ export function UserStats({ userData }) {
   const maxExp = 1000
 
   return (
-    <div className="space-y-4 mb-6">
+    <div className="space-y-4 mb-6" style={{"margin-top": "100px"}}>
       {" "}
       {/* Added mb-6 for gap before cave */}
       {/* Welcome message with user's name */}

@@ -129,14 +129,14 @@ export default function PhoneApp() {
   )
 
   // Show loading state
-  if (loading) {
+  if (loading || !userData) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center p-5">
         <div className="w-[375px] h-[812px] bg-gray-900 rounded-[40px] p-2 shadow-2xl relative">
           <div className="w-full h-full bg-white rounded-[32px] overflow-hidden flex flex-col items-center justify-center">
             <div className="text-6xl mb-4">⛏️</div>
-            <div className="text-xl font-semibold text-amber-800">Loading excavation data...</div>
-            <div className="text-sm text-amber-600 mt-2">Connecting to base camp...</div>
+            <div className="text-xl font-semibold text-amber-800">Generating fitness plan...</div>
+            <div className="text-sm text-amber-600 mt-2">Connecting to server...</div>
           </div>
         </div>
       </div>
@@ -155,7 +155,7 @@ export default function PhoneApp() {
       {/* Phone frame container */}
       <div className="w-[375px] h-[812px] bg-gray-900 rounded-[40px] p-2 shadow-2xl relative">
         {/* iPhone-style notch at top */}
-        <div className="absolute top-5 left-1/2 transform -translate-x-1/2 w-36 h-1.5 bg-gray-800 rounded-full z-10"></div>
+        {/* <div className="absolute top-5 left-1/2 transform -translate-x-1/2 w-36 h-1.5 bg-gray-800 rounded-full z-10"></div> */}
 
         {/* Phone screen container */}
         <div className="w-full h-full bg-white rounded-[32px] overflow-hidden flex flex-col">
@@ -202,17 +202,7 @@ export default function PhoneApp() {
                 />
 
                 {/* Single action button - removed "Start Training" */}
-                <div className="space-y-3">
-                  {/* Primary action - switches to roadmap view with mole jump animation */}
-                  <button
-                    onClick={handleContinueLearning}
-                    className="w-full bg-gradient-to-r from-emerald-700 to-emerald-800 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-200 active:scale-95 border-2 border-emerald-600 relative overflow-hidden"
-                  >
-                    {/* Button texture */}
-                    <div className="absolute inset-0 opacity-20 bg-gradient-to-r from-emerald-900 to-emerald-800"></div>
-                    <span className="relative z-10">⛏️ Continue Excavating</span>
-                  </button>
-                </div>
+           
               </div>
 
               {/* Underground decorative elements */}
@@ -231,7 +221,7 @@ export default function PhoneApp() {
               }}
             >
               {/* Underground tunnel header */}
-              <div className="text-center py-6 px-5 relative">
+              <div className="text-center py-6 px-5 relative" style={{"borderBottom": "#956638 1px solid"}}>
                 {/* Dirt/soil texture overlay */}
                 <div className="absolute inset-0 opacity-20">
                   <div className="w-full h-full bg-gradient-to-b from-amber-900 to-amber-800"></div>
@@ -241,12 +231,10 @@ export default function PhoneApp() {
                   <div className="absolute top-6 left-8 w-1 h-1 bg-amber-700 rounded-full"></div>
                 </div>
 
-                <h1 className="text-3xl font-bold text-amber-100 mb-3 relative z-10">
-                  {userData?.["first-name"]}'s Excavation Plan
+                <h1 className="text-2xl font-bold text-amber-100 mb-3 relative z-10">
+                  {userData.days} Day Fitness Roadmap
                 </h1>
-                <div className="bg-amber-800 bg-opacity-60 px-4 py-2 rounded-full text-sm text-amber-100 inline-block relative z-10 border border-amber-600">
-                  {userData?.plan?.days?.length || 0} Tunnel Sections • {userData?.skill || "beginner"} Level
-                </div>
+               
               </div>
 
               {/* Dynamic roadmap based on user data */}
@@ -257,9 +245,9 @@ export default function PhoneApp() {
           {/* Bottom Navigation Bar with cave theme */}
           <div className="h-20 bg-gradient-to-r from-amber-50 to-amber-100 border-t-2 border-amber-200 flex shadow-lg">
             {/* Dashboard navigation button */}
-            <NavButton view="dashboard" icon="🏠" label="Base Camp" />
+            <NavButton view="dashboard" icon="🏠" label="Home" />
             {/* Roadmap navigation button */}
-            <NavButton view="roadmap" icon="🗺️" label="Tunnels" />
+            <NavButton view="roadmap" icon="🗺️" label="Roadmap" />
           </div>
         </div>
       </div>
