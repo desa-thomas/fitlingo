@@ -1,5 +1,6 @@
 let user_data = null; 
 
+
 function showPage(pageId) {
     const pages = ['main-menu', 'roadmap', 'settings'];
     pages.forEach(id => {
@@ -26,7 +27,6 @@ function showPage(pageId) {
 }
 
 
-
 async function loadUserData(username) {
   try {
     const response = await fetch(`http://fitlingo.duckdns.org:5000/getuser?username=${encodeURIComponent(username)}`);
@@ -41,21 +41,35 @@ async function loadUserData(username) {
   }
 }
 
+function getTimeGreeting() {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) return "Good morning";
+  if (hour >= 12 && hour < 17) return "Good afternoon";
+  if (hour >= 17 && hour < 21) return "Good evening";
+  return "Good night";
+}
+
+function capitalizeFirstLetter(str) {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
 
 function populateMainMenu(user) {
-  // Example: show first name in mole square
-  document.querySelector('.username').textContent = `${user["first-name"]}!`;
+  const greeting = getTimeGreeting();
+  const firstName = capitalizeFirstLetter(user["first-name"] || "User");
 
-  // Show age in calorie square for demo
+  document.querySelector('.greeting').textContent = `${greeting}, ${firstName}!`; //set gretting message
+
+  // You can still show the name elsewhere if needed
+  document.querySelector('.username').textContent = `${firstName}!`;
+
+  // Show calorie intake
   const fullIntake = user.plan.days[0]["suggested-calorie-intake"];
   const shortIntake = fullIntake.slice(0, 14);
   document.querySelector('.calorie').textContent = shortIntake;
+}
 
-
-
-// On page load, call the fetch with username
 document.addEventListener('DOMContentLoaded', () => {
-  const username = 'test_user'; // Replace dynamically as needed
+  const username = 'test_user'; // Replace dynamically if needed
   loadUserData(username);
 });
-}
