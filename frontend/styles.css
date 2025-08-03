@@ -1,0 +1,161 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #51a8ff;
+    font-family: 'Montserrat', 'Poppins', 'Roboto', sans-serif;}
+
+.menu-title {
+    grid-column: 1 / -1; /* Span across all grid columns */
+    text-align: center;
+    color: white;
+    font-size: 1.8rem;
+    margin-top: 0px;
+    margin-bottom: 10px; /* Optional: tighten spacing */
+}
+
+.greeting {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  margin-top: 10vh;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.phone {
+    width: 100vw;
+    height: 100vh;
+    max-width: 500px;  /* Optional: limits max width on tablets */
+    max-height: 1000px; /* Optional: limits on large screens */
+    border-radius: 36px;
+    background: rgb(37, 37, 37); /* Match border color */
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    border: 9px solid rgb(19, 18, 18);
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+    background: #126b00;
+    background: linear-gradient(180deg,rgba(18, 107, 0, 1) 0%, rgba(97, 62, 17, 1) 23%, rgba(64, 30, 0, 1) 100%);
+    position: relative;
+    border-radius: 27px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*Status bar and the icons*/
+.status-bar {
+    color: white;
+    font-weight: bold;
+    height: 25px;
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 355px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    z-index: 1000;
+    pointer-events: none;
+    padding: 0px 30px 0px 30px;
+}
+
+
+
+.bottom-nav {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background: #f4f4f4;
+    border-top: 4px solid #ffae00;
+    z-index: 10;
+    padding-bottom: 20px;
+}
+
+.nav-btn {
+    flex: 1; /* Equal width for all buttons */
+    border: none;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 8px 0;
+}
+
+.nav-btn.active {
+    background: #ffe4a3;
+    font-weight: bold;
+    border-top: 3px solid orange;
+}
+
+
+
+.main-menu-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* title at top, grid pushed to bottom */
+    height: calc(100% - 60px); /* assuming nav bar is 60px tall */
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.menu-title {
+    text-align: center;
+    color: white;
+    font-size: 1.8rem;
+    margin-top: 10px;
+    margin-top: 40px;
+}
+
+/* Grid gets pushed down but stays above nav */
+.main-menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(100px, 18vh);
+    gap: 24px;
+    padding-bottom: 40px;
+    box-sizing: border-box;
+}
+
+.menu-square {
+    background: #fff;
+    border: #ffc671 solid 4px;
+    border-radius: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #222;
+    height: 13vh;   /* Fixed square size */
+    min-height: 120px;
+    max-height: 200px;
+}
+
+.username {
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
