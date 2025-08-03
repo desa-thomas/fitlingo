@@ -1,4 +1,12 @@
 let user_data = null; 
+const url = "http://fitlingo.duckdns.org:5000" 
+console.log("bruh"); 
+
+window.onload = function() {
+    const username = 'test_user'; // Replace dynamically as needed
+    console.log("bruh again"); 
+    loadUserData(username);
+}
 
 function showPage(pageId) {
     const pages = ['main-menu', 'roadmap', 'settings'];
@@ -29,9 +37,12 @@ function showPage(pageId) {
 
 async function loadUserData(username) {
   try {
+    console.log("waiting..."); 
     const response = await fetch(`http://fitlingo.duckdns.org:5000/getuser?username=${encodeURIComponent(username)}`);
     if (!response.ok) throw new Error('Network response was not ok');
+    
     const data = await response.json();
+    console.log("gotit");
 
     // Now populate the menu with this data
     populateMainMenu(data);
@@ -40,7 +51,6 @@ async function loadUserData(username) {
     console.error('Failed to fetch user data:', error);
   }
 }
-
 
 function populateMainMenu(user) {
   // Example: show first name in mole square
@@ -51,11 +61,4 @@ function populateMainMenu(user) {
   const shortIntake = fullIntake.slice(0, 14);
   document.querySelector('.calorie').textContent = shortIntake;
 
-
-
-// On page load, call the fetch with username
-document.addEventListener('DOMContentLoaded', () => {
-  const username = 'test_user'; // Replace dynamically as needed
-  loadUserData(username);
-});
 }
